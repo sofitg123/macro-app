@@ -34,7 +34,9 @@ export const FOODS = {
   carb: {
     label: "Carb", emoji: "🌽", color: "#FFF0D6", textColor: "#B07000",
     items: [
-      { id: "tortilla", name: "Tortilla de maíz", portion: "1 pieza ~30g", kcal: 60, prot: 1, carb: 13, fat: 1, sugar: 0 },
+      { id: "tortilla_nopal", name: "Tortilla de nopal real (Señor Cactus)", portion: "1 pieza ~30g", kcal: 30, prot: 1, carb: 5, fat: 0, sugar: 0 },
+      { id: "tortilla", name: "Tortilla de maíz", portion: "1 pieza ~30g", kcal: 64, prot: 1, carb: 13, fat: 1, sugar: 0 },
+      { id: "tortilla_harina", name: "Tortillina Tía Rosa", portion: "1 pieza ~25g", kcal: 76, prot: 2, carb: 13, fat: 3, sugar: 0 },
       { id: "pan_hogaza", name: "Pan hogaza/integral", portion: "1 rebanada ~35g", kcal: 85, prot: 3, carb: 16, fat: 1, sugar: 1 },
       { id: "tostada_melba", name: "Tostada Melba", portion: "3 piezas", kcal: 75, prot: 2, carb: 15, fat: 1, sugar: 0 },
       { id: "frijol", name: "Frijoles de olla", portion: "60g", kcal: 80, prot: 5, carb: 14, fat: 0, sugar: 0 },
