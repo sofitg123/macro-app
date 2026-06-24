@@ -40,7 +40,8 @@ export function calcTotals(data) {
     prot: acc.prot + (item.prot || 0) * (item.count || 1),
     carb: acc.carb + (item.carb || 0) * (item.count || 1),
     fat: acc.fat + (item.fat || 0) * (item.count || 1),
-  }), { kcal: 0, prot: 0, carb: 0, fat: 0 });
+    sugar: acc.sugar + (item.sugar || 0) * (item.count || 1),
+  }), { kcal: 0, prot: 0, carb: 0, fat: 0, sugar: 0 });
 }
 
 export function getLastNDays(n) {

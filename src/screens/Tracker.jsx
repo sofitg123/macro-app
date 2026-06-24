@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FOODS } from "../foods";
 import { DAILY_GOALS, calcTotals } from "../storage";
+const SUGAR_GOAL = 25;
 
 const MEALS = [
   { id: "desayuno", label: "Desayuno", emoji: "🌅" },
@@ -41,6 +42,7 @@ export default function Tracker({ data, setData }) {
     prot: DAILY_GOALS.prot - dayTotals.prot,
     carb: DAILY_GOALS.carb - dayTotals.carb,
     fat: DAILY_GOALS.fat - dayTotals.fat,
+    sugar: SUGAR_GOAL - (dayTotals.sugar || 0),
   };
 
   const toggleFood = (foodId, food) => {
@@ -79,12 +81,14 @@ export default function Tracker({ data, setData }) {
         <MacroBar label="proteína" value={dayTotals.prot} goal={DAILY_GOALS.prot} color="#2A80C0" />
         <MacroBar label="carbs" value={dayTotals.carb} goal={DAILY_GOALS.carb} color="#C08020" />
         <MacroBar label="grasa" value={dayTotals.fat} goal={DAILY_GOALS.fat} color="#C04040" />
+        <MacroBar label="azúcar" value={dayTotals.sugar || 0} goal={SUGAR_GOAL} color="#9B59B6" />
         <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
           {[
             { key: "kcal", label: "restantes", color: "#4A9F2A", unit: "kcal" },
             { key: "prot", label: "prot", color: "#2A80C0", unit: "g" },
             { key: "carb", label: "carbs", color: "#C08020", unit: "g" },
             { key: "fat", label: "grasa", color: "#C04040", unit: "g" },
+            { key: "sugar", label: "azúcar", color: "#9B59B6", unit: "g" },
           ].map(({ key, label, color, unit }) => {
             const rem = Math.round(remaining[key]);
             const over = rem < 0;
