@@ -3,6 +3,9 @@ import { FOODS } from "../foods";
 import { DAILY_GOALS, calcTotals } from "../storage";
 const SUGAR_GOAL = 25;
 
+
+const FLAG_COLOR = { green: "#4A9F2A", yellow: "#C08020", red: "#C03030" };
+
 const MEALS = [
   { id: "desayuno", label: "Desayuno", emoji: "🌅" },
   { id: "comida", label: "Comida", emoji: "☀️" },
@@ -165,7 +168,11 @@ export default function Tracker({ data, setData }) {
                     return (
                       <div key={food.id} onClick={() => toggleFood(food.id, food)} style={{ display: "flex", alignItems: "center", padding: "10px 14px", cursor: "pointer", background: count > 0 ? group.color : "transparent", borderBottom: "1px solid #F8F8F8" }}>
                         <div style={{ flex: 1 }}>
-                          <div style={{ fontSize: 14, fontWeight: count > 0 ? 600 : 400, color: count > 0 ? group.textColor : "#1A1A1A" }}>{food.name}</div>
+                          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                          <span style={{ width: 8, height: 8, borderRadius: "50%", background: FLAG_COLOR[food.flag] || "#999", display: "inline-block", flexShrink: 0 }} />
+                          <span style={{ fontSize: 14, fontWeight: count > 0 ? 600 : 400, color: count > 0 ? group.textColor : "#1A1A1A" }}>{food.name}</span>
+                          {food.gluten && <span style={{ fontSize: 11 }}>🌾</span>}
+                        </div>
                           <div style={{ fontSize: 12, color: "#999", marginTop: 1 }}>{food.portion}</div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
