@@ -113,6 +113,7 @@ export const FOODS = {
       { id: "cajeta", name: "Cajeta 1 cda sopera", portion: "20g", kcal: 65, prot: 0, carb: 16, fat: 1, sugar: 14, flag: "red", gluten: false },
       { id: "oreo_tapas", name: "Oreo 2 tapas sin relleno", portion: "10g", kcal: 48, prot: 1, carb: 8, fat: 2, sugar: 4, flag: "red", gluten: true },
       { id: "pasta_alfredo", name: "Pasta Alfredo porción", portion: "300g", kcal: 650, prot: 18, carb: 72, fat: 32, sugar: 4, flag: "red", gluten: true },
+      { id: "pizza_mariscos", name: "Pizza Toscana mariscos c/tocino", portion: "1 rebanada ~120g", kcal: 350, prot: 15, carb: 32, fat: 16, sugar: 2, flag: "yellow", gluten: true },
     ],
   },
 };
