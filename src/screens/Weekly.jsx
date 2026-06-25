@@ -18,12 +18,12 @@ export default function Weekly({ onDayPress }) {
         <div style={{ flex: 1, background: "#fff", borderRadius: 12, padding: "14px 16px", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <div style={{ fontSize: 11, color: "#999", marginBottom: 4 }}>Promedio kcal</div>
           <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "monospace", color: avg.kcal >= 1600 && avg.kcal <= 2200 ? "#4A9F2A" : "#C03030" }}>{avg.kcal}</div>
-          <div style={{ fontSize: 11, color: "#bbb" }}>meta 2,000</div>
+          <div style={{ fontSize: 11, color: "#bbb" }}>meta 2,200</div>
         </div>
         <div style={{ flex: 1, background: "#fff", borderRadius: 12, padding: "14px 16px", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <div style={{ fontSize: 11, color: "#999", marginBottom: 4 }}>Promedio proteína</div>
-          <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "monospace", color: avg.prot >= 100 ? "#4A9F2A" : "#C03030" }}>{avg.prot}g</div>
-          <div style={{ fontSize: 11, color: "#bbb" }}>meta 120g</div>
+          <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "monospace", color: avg.prot >= 110 ? "#4A9F2A" : "#C03030" }}>{avg.prot}g</div>
+          <div style={{ fontSize: 11, color: "#bbb" }}>meta 125g</div>
         </div>
       </div>
 
@@ -35,7 +35,7 @@ export default function Weekly({ onDayPress }) {
             <XAxis dataKey="label" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
             <YAxis hide domain={[0, 2500]} />
             <Tooltip formatter={(v) => [`${Math.round(v)} kcal`]} labelStyle={{ fontSize: 12 }} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-            <ReferenceLine y={2000} stroke="#4A9F2A" strokeDasharray="4 4" />
+            <ReferenceLine y={2200} stroke="#4A9F2A" strokeDasharray="4 4" />
             <Line type="monotone" dataKey="kcal" stroke="#2A80C0" strokeWidth={2} dot={(props) => {
               const { cx, cy, payload } = props;
               const color = payload.kcal >= 1600 && payload.kcal <= 2200 ? "#4A9F2A" : payload.kcal === 0 ? "#ddd" : "#C03030";
@@ -66,8 +66,8 @@ export default function Weekly({ onDayPress }) {
       {/* Day by day */}
       <div style={{ background: "#fff", borderRadius: 14, overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
         {days.map((day, i) => {
-          const metaKcal = day.kcal >= 1600 && day.kcal <= 2200;
-          const metaProt = day.prot >= 100;
+          const metaKcal = day.kcal >= 1800 && day.kcal <= 2400;
+          const metaProt = day.prot >= 110;
           const empty = day.kcal === 0;
           return (
             <div key={day.date} onClick={() => onDayPress && onDayPress(day.date)} style={{ display: "flex", alignItems: "center", padding: "12px 16px", borderBottom: i < days.length - 1 ? "1px solid #F5F5F5" : "none", cursor: "pointer" }}>

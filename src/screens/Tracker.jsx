@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FOODS } from "../foods";
 import { DAILY_GOALS, calcTotals } from "../storage";
 const SUGAR_GOAL = 25;
+const KCAL_GOAL = 2200;
 
 
 const FLAG_COLOR = { green: "#4A9F2A", yellow: "#C08020", red: "#C03030" };
@@ -46,7 +47,7 @@ function getEquivMsg(macro, value, goal) {
   return `Te pasaste ${Math.round(over)}g de ${labels[macro]}, como comer ${text} extra.`;
 }
 
-function getSurplusMessage(kcalOver) {
+function getSurplusMessage(kcalOver) { // kcalOver is vs 2200
   if (kcalOver <= 0) return null;
   if (kcalOver < 200) return { msg: "Estás ligeramente arriba. Una cena ligera de proteína y verdura lo equilibra.", color: "#B07000", bg: "#FFF8E8" };
   if (kcalOver < 500) return { msg: "Hoy fue un día más alto. No hay que compensar mañana, solo vuelve a tu plan normal.", color: "#B07000", bg: "#FFF8E8" };
@@ -126,7 +127,7 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
       <div style={{ background: "#fff", padding: "16px 16px 14px", position: "sticky", top: 0, zIndex: 20, borderBottom: "1px solid #EBEBEB", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: "#1A1A1A" }}>Total del día</span>
-          <span style={{ fontSize: 11, color: "#bbb" }}>Meta: 2,000 kcal · 120g prot</span>
+          <span style={{ fontSize: 11, color: "#bbb" }}>Meta: 2,200 kcal · 125g prot</span>
         </div>
         <MacroBar label="kcal" value={dayTotals.kcal} goal={DAILY_GOALS.kcal} color="#4A9F2A" />
         <MacroBar label="proteína" value={dayTotals.prot} goal={DAILY_GOALS.prot} color="#2A80C0" />
@@ -162,7 +163,7 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
       </div>
 
       {/* Surplus message */}
-      {(() => { const msg = getSurplusMessage(dayTotals.kcal - 2000); return msg ? (
+      {(() => { const msg = getSurplusMessage(dayTotals.kcal - KCAL_GOAL); return msg ? (
         <div style={{ margin: "8px 16px 0", background: msg.bg, borderRadius: 10, padding: "10px 14px" }}>
           <div style={{ fontSize: 13, color: msg.color, lineHeight: 1.5 }}>{msg.msg}</div>
         </div>

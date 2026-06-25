@@ -1,4 +1,4 @@
-export const DAILY_GOALS = { kcal: 2000, prot: 120, carb: 100, fat: 60 };
+export const DAILY_GOALS = { kcal: 2200, prot: 125, carb: 154, fat: 65 };
 
 export function getTodayKey() {
   const d = new Date();
