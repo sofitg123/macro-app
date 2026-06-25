@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { getLastNDays, DAILY_GOALS } from "../storage";
 
 export default function Monthly() {
-  const [tip, setTip] = useState(null);
-  const [loading, setLoading] = useState(false);
   const days = getLastNDays(30);
   const tracked = days.filter(d => d.kcal > 0);
 
@@ -17,28 +14,6 @@ export default function Monthly() {
   const daysOnKcal = tracked.filter(d => d.kcal >= 1800 && d.kcal <= 2400).length;
   const daysOnProt = tracked.filter(d => d.prot >= 100).length;
   const bestDay = tracked.length > 0 ? tracked.reduce((a, b) => (b.prot > a.prot ? b : a), tracked[0]) : null;
-
-  const getTip = async () => {
-    setLoading(true);
-    try {
-      const summary = `La usuaria tiene las siguientes metas: 2200 kcal/día y 125g proteína/día. En los últimos ${tracked.length} días registrados: promedio de ${avg.kcal} kcal y ${avg.prot}g proteína. Llegó a meta de calorías ${daysOnKcal} de ${tracked.length} días. Llegó a meta de proteína ${daysOnProt} de ${tracked.length} días. Su mejor día fue ${bestDay?.label} con ${bestDay?.prot}g proteína.`;
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-6",
-          max_tokens: 1000,
-          system: "Eres una nutrióloga concisa que da tips específicos y accionables en español mexicano casual. Máximo 3 oraciones. Sin saludos. Sin emojis. Solo el tip directo basado en los datos.",
-          messages: [{ role: "user", content: `Basado en estos datos de la semana, dame 1 tip específico y accionable: ${summary}` }],
-        }),
-      });
-      const data = await res.json();
-      setTip(data.content?.[0]?.text || "No se pudo generar el tip.");
-    } catch {
-      setTip("Conecta internet para generar tu tip personalizado.");
-    }
-    setLoading(false);
-  };
 
   return (
     <div style={{ padding: "20px 16px" }}>

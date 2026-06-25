@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { getLastNDays, DAILY_GOALS } from "../storage";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from "recharts";
 
@@ -42,6 +43,14 @@ function exportWeekData(days) {
     lines.push(`Promedio kcal: ${Math.round(totalKcal / trackedDays)} (meta 2,200)`);
     lines.push(`Promedio proteína: ${Math.round(totalProt / trackedDays)}g (meta 125g)`);
   }
+
+  lines.push(`\n---\nEres mi nutrióloga y coach de salud personal. Analiza detalladamente lo que comí esta semana y dame:`);
+  lines.push(`1. Un análisis honesto de mis patrones (sin sugarcoating)`);
+  lines.push(`2. Qué alimentos estoy repitiendo demasiado y por qué puede ser un problema`);
+  lines.push(`3. Qué tiempos de comida son más débiles en proteína`);
+  lines.push(`4. 2-3 cambios concretos y específicos para la próxima semana`);
+  lines.push(`5. Un tip para mi caso específico: mujer 29 años, ADHD, historial de binge, meta bajar grasa visceral`);
+  lines.push(`\nSé específica con los alimentos que ves, no genérica.`);
 
   return lines.join("\n");
 }
