@@ -30,7 +30,7 @@ function MacroBar({ label, value, goal, color }) {
   );
 }
 
-export default function Tracker({ data, setData }) {
+export default function Tracker({ data, setData, date, isToday, onBackToToday }) {
   const [activeMeal, setActiveMeal] = useState("desayuno");
   const [openGroup, setOpenGroup] = useState("proteina");
 

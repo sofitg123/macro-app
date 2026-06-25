@@ -1,7 +1,7 @@
 import { getLastNDays, DAILY_GOALS } from "../storage";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from "recharts";
 
-export default function Weekly() {
+export default function Weekly({ onDayPress }) {
   const days = getLastNDays(7);
   const avg = {
     kcal: Math.round(days.reduce((a, d) => a + d.kcal, 0) / 7),
@@ -70,7 +70,7 @@ export default function Weekly() {
           const metaProt = day.prot >= 100;
           const empty = day.kcal === 0;
           return (
-            <div key={day.date} style={{ display: "flex", alignItems: "center", padding: "12px 16px", borderBottom: i < days.length - 1 ? "1px solid #F5F5F5" : "none" }}>
+            <div key={day.date} onClick={() => onDayPress && onDayPress(day.date)} style={{ display: "flex", alignItems: "center", padding: "12px 16px", borderBottom: i < days.length - 1 ? "1px solid #F5F5F5" : "none", cursor: "pointer" }}>
               <div style={{ width: 10, height: 10, borderRadius: "50%", background: empty ? "#E0E0E0" : (metaKcal && metaProt) ? "#4A9F2A" : "#C03030", marginRight: 12, flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 13, fontWeight: 500 }}>{day.label}</div>

@@ -1,7 +1,11 @@
 export const DAILY_GOALS = { kcal: 2000, prot: 120, carb: 100, fat: 60 };
 
 export function getTodayKey() {
-  return new Date().toISOString().slice(0, 10);
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 export function loadDay(key) {
@@ -49,7 +53,10 @@ export function getLastNDays(n) {
   for (let i = n - 1; i >= 0; i--) {
     const d = new Date();
     d.setDate(d.getDate() - i);
-    const key = d.toISOString().slice(0, 10);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const key = `${year}-${month}-${day}`;
     const data = loadDay(key);
     const totals = calcTotals(data);
     result.push({ date: key, label: d.toLocaleDateString("es-MX", { weekday: "short", day: "numeric" }), ...totals });
