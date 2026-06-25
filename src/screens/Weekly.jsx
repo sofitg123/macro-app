@@ -133,7 +133,6 @@ export default function Weekly({ onDayPress }) {
           );
         })}
       </div>
-    </div>
 
       {/* Export button */}
       <div style={{ margin: "16px 0 8px" }}>
