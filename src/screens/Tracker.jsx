@@ -33,6 +33,11 @@ function getEquivMsg(macro, value, goal) {
       { limit: 999, text: "más de una lata de refresco en azúcar" },
     ],
   };
+  if (macro === "prot") {
+    const extra = Math.round(value - goal);
+    if (extra <= 0) return null;
+    return `+${extra}g proteína extra 💪 eso protege tu músculo y te mantiene saciada.`;
+  }
   const labels = { carb: "carbs", fat: "grasa", sugar: "azúcar" };
   const list = equiv[macro];
   if (!list) return null;
@@ -128,10 +133,11 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
         <MacroBar label="carbs" value={dayTotals.carb} goal={DAILY_GOALS.carb} color="#C08020" />
         <MacroBar label="grasa" value={dayTotals.fat} goal={DAILY_GOALS.fat} color="#C04040" />
         <MacroBar label="azúcar" value={dayTotals.sugar || 0} goal={SUGAR_GOAL} color="#9B59B6" />
-        {["carb","fat","sugar"].map(macro => {
-          const vals = { carb: [dayTotals.carb, DAILY_GOALS.carb], fat: [dayTotals.fat, DAILY_GOALS.fat], sugar: [dayTotals.sugar||0, SUGAR_GOAL] };
+        {["prot","carb","fat","sugar"].map(macro => {
+          const vals = { prot: [dayTotals.prot, DAILY_GOALS.prot], carb: [dayTotals.carb, DAILY_GOALS.carb], fat: [dayTotals.fat, DAILY_GOALS.fat], sugar: [dayTotals.sugar||0, SUGAR_GOAL] };
           const msg = getEquivMsg(macro, vals[macro][0], vals[macro][1]);
-          return msg ? <div key={macro} style={{ fontSize: 11, color: "#A03030", marginTop: 3, paddingLeft: 2 }}>↑ {msg}</div> : null;
+          const isGood = macro === "prot";
+          return msg ? <div key={macro} style={{ fontSize: 11, color: isGood ? "#2A7A2A" : "#A03030", marginTop: 3, paddingLeft: 2 }}>{isGood ? "" : "↑ "}{msg}</div> : null;
         })}
         <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
           {[
