@@ -115,6 +115,7 @@ export const FOODS = {
       { id: "pasta_alfredo", name: "Pasta Alfredo porción", portion: "300g", kcal: 650, prot: 18, carb: 72, fat: 32, sugar: 4, flag: "red", gluten: true },
       { id: "pizza_mariscos", name: "Pizza Toscana mariscos c/tocino", portion: "1 rebanada ~120g", kcal: 350, prot: 15, carb: 32, fat: 16, sugar: 2, flag: "yellow", gluten: true },
       { id: "polvorones", name: "Polvorones Marinela (4 galletas)", portion: "4 piezas ~56g", kcal: 290, prot: 2, carb: 36, fat: 16, sugar: 18, flag: "red", gluten: true },
+      { id: "tostada_atun", name: "Tostada de atún (Milpa Real)", portion: "1 tostada completa", kcal: 360, prot: 18, carb: 22, fat: 18, sugar: 1, flag: "yellow", gluten: false },
     ],
   },
 };
