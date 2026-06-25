@@ -6,6 +6,15 @@ const SUGAR_GOAL = 25;
 
 const FLAG_COLOR = { green: "#4A9F2A", yellow: "#C08020", red: "#C03030" };
 
+
+function getSurplusMessage(kcalOver) {
+  if (kcalOver <= 0) return null;
+  if (kcalOver < 200) return { msg: "Estás ligeramente arriba. Una cena ligera de proteína y verdura lo equilibra.", color: "#B07000", bg: "#FFF8E8" };
+  if (kcalOver < 500) return { msg: "Hoy fue un día más alto. No hay que compensar mañana, solo vuelve a tu plan normal.", color: "#B07000", bg: "#FFF8E8" };
+  if (kcalOver < 800) return { msg: "Día social, pasa. Si cenas solo proteína el impacto real en la semana es mínimo.", color: "#8A5000", bg: "#FFF0D6" };
+  return { msg: "Hoy fue un día libre. Mañana desayuna bien con proteína y sigue normal. Un día no define nada.", color: "#666", bg: "#F5F5F5" };
+}
+
 const MEALS = [
   { id: "desayuno", label: "Desayuno", emoji: "🌅" },
   { id: "comida", label: "Comida", emoji: "☀️" },
@@ -106,6 +115,13 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
           })}
         </div>
       </div>
+
+      {/* Surplus message */}
+      {(() => { const msg = getSurplusMessage(dayTotals.kcal - 2000); return msg ? (
+        <div style={{ margin: "8px 16px 0", background: msg.bg, borderRadius: 10, padding: "10px 14px" }}>
+          <div style={{ fontSize: 13, color: msg.color, lineHeight: 1.5 }}>{msg.msg}</div>
+        </div>
+      ) : null; })()}
 
       {/* Meal tabs */}
       <div style={{ display: "flex", background: "#fff", borderBottom: "1px solid #EBEBEB", position: "sticky", top: 165, zIndex: 15 }}>
