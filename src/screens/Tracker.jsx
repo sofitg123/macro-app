@@ -7,6 +7,40 @@ const SUGAR_GOAL = 25;
 const FLAG_COLOR = { green: "#4A9F2A", yellow: "#C08020", red: "#C03030" };
 
 
+
+function getEquivMsg(macro, value, goal) {
+  const over = value - goal;
+  if (over <= 0) return null;
+  const equiv = {
+    carb: [
+      { limit: 13, text: "1 tortilla de maíz" },
+      { limit: 26, text: "2 tortillas de maíz" },
+      { limit: 40, text: "3 tortillas de maíz" },
+      { limit: 60, text: "media taza de arroz" },
+      { limit: 90, text: "un plato de pasta" },
+      { limit: 999, text: "más de un plato de pasta" },
+    ],
+    fat: [
+      { limit: 10, text: "1 cucharada de aceite de oliva" },
+      { limit: 18, text: "1/4 de aguacate" },
+      { limit: 30, text: "2 cucharadas de aceite" },
+      { limit: 999, text: "más de 2 cucharadas de aceite" },
+    ],
+    sugar: [
+      { limit: 10, text: "2 cucharaditas de azúcar" },
+      { limit: 20, text: "medio refresco normal" },
+      { limit: 35, text: "una lata de refresco" },
+      { limit: 999, text: "más de una lata de refresco en azúcar" },
+    ],
+  };
+  const labels = { carb: "carbs", fat: "grasa", sugar: "azúcar" };
+  const list = equiv[macro];
+  if (!list) return null;
+  const match = list.find(e => over <= e.limit);
+  const text = match ? match.text : list[list.length-1].text;
+  return `Te pasaste ${Math.round(over)}g de ${labels[macro]}, como comer ${text} extra.`;
+}
+
 function getSurplusMessage(kcalOver) {
   if (kcalOver <= 0) return null;
   if (kcalOver < 200) return { msg: "Estás ligeramente arriba. Una cena ligera de proteína y verdura lo equilibra.", color: "#B07000", bg: "#FFF8E8" };
@@ -94,6 +128,11 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
         <MacroBar label="carbs" value={dayTotals.carb} goal={DAILY_GOALS.carb} color="#C08020" />
         <MacroBar label="grasa" value={dayTotals.fat} goal={DAILY_GOALS.fat} color="#C04040" />
         <MacroBar label="azúcar" value={dayTotals.sugar || 0} goal={SUGAR_GOAL} color="#9B59B6" />
+        {["carb","fat","sugar"].map(macro => {
+          const vals = { carb: [dayTotals.carb, DAILY_GOALS.carb], fat: [dayTotals.fat, DAILY_GOALS.fat], sugar: [dayTotals.sugar||0, SUGAR_GOAL] };
+          const msg = getEquivMsg(macro, vals[macro][0], vals[macro][1]);
+          return msg ? <div key={macro} style={{ fontSize: 11, color: "#A03030", marginTop: 3, paddingLeft: 2 }}>↑ {msg}</div> : null;
+        })}
         <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
           {[
             { key: "kcal", label: "restantes", color: "#4A9F2A", unit: "kcal" },
