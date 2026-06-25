@@ -114,6 +114,7 @@ export const FOODS = {
       { id: "oreo_tapas", name: "Oreo 2 tapas sin relleno", portion: "10g", kcal: 48, prot: 1, carb: 8, fat: 2, sugar: 4, flag: "red", gluten: true },
       { id: "pasta_alfredo", name: "Pasta Alfredo porción", portion: "300g", kcal: 650, prot: 18, carb: 72, fat: 32, sugar: 4, flag: "red", gluten: true },
       { id: "pizza_mariscos", name: "Pizza Toscana mariscos c/tocino", portion: "1 rebanada ~120g", kcal: 350, prot: 15, carb: 32, fat: 16, sugar: 2, flag: "yellow", gluten: true },
+      { id: "polvorones", name: "Polvorones Marinela (4 galletas)", portion: "4 piezas ~56g", kcal: 290, prot: 2, carb: 36, fat: 16, sugar: 18, flag: "red", gluten: true },
     ],
   },
 };
