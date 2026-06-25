@@ -1,4 +1,4 @@
-import { getLastNDays, DAILY_GOALS } from "../storage";
+import { getLastNDays } from "../storage";
 
 export default function Monthly() {
   const days = getLastNDays(30);
@@ -12,8 +12,7 @@ export default function Monthly() {
   } : { kcal: 0, prot: 0, carb: 0, fat: 0 };
 
   const daysOnKcal = tracked.filter(d => d.kcal >= 1800 && d.kcal <= 2400).length;
-  const daysOnProt = tracked.filter(d => d.prot >= 100).length;
-  const bestDay = tracked.length > 0 ? tracked.reduce((a, b) => (b.prot > a.prot ? b : a), tracked[0]) : null;
+  const daysOnProt = tracked.filter(d => d.prot >= 110).length;
 
   return (
     <div style={{ padding: "20px 16px" }}>
@@ -27,7 +26,6 @@ export default function Monthly() {
       )}
 
       {tracked.length > 0 && <>
-        {/* Avg macros */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
           {[
             { label: "Kcal promedio", value: avg.kcal, unit: "kcal", goal: 2200, color: "#4A9F2A" },
@@ -46,7 +44,6 @@ export default function Monthly() {
           })}
         </div>
 
-        {/* Meta days */}
         <div style={{ background: "#fff", borderRadius: 14, padding: "16px", marginBottom: 16, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>Días en meta</div>
           <div style={{ display: "flex", gap: 10 }}>
@@ -67,18 +64,9 @@ export default function Monthly() {
           </div>
         </div>
 
-        {/* AI Tip */}
         <div style={{ background: "#fff", borderRadius: 14, padding: 16, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
-          <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Tip personalizado IA</div>
-          {tip && <p style={{ fontSize: 14, lineHeight: 1.6, color: "#333", margin: "0 0 12px" }}>{tip}</p>}
-          {!tip && <p style={{ fontSize: 13, color: "#bbb", margin: "0 0 12px" }}>Genera tu tip semanal basado en tus datos reales.</p>}
-          <button
-            onClick={getTip}
-            disabled={loading}
-            style={{ width: "100%", padding: "12px", background: loading ? "#F0F0F0" : "#1A1A1A", color: loading ? "#bbb" : "#fff", border: "none", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: loading ? "default" : "pointer" }}
-          >
-            {loading ? "Generando..." : tip ? "Regenerar tip" : "Generar mi tip"}
-          </button>
+          <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 6 }}>¿Quieres tu análisis mensual?</div>
+          <p style={{ fontSize: 13, color: "#999", lineHeight: 1.5 }}>Ve a la pantalla Semana, toca "Exportar semana para análisis con Claude", pega el texto en un chat nuevo con Claude y recibe tu análisis personalizado.</p>
         </div>
       </>}
     </div>
