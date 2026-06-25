@@ -1,7 +1,53 @@
 import { getLastNDays, DAILY_GOALS } from "../storage";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from "recharts";
 
+
+function exportWeekData(days) {
+  const lines = ["📊 MI SEMANA — REPORTE COMPLETO PARA ANÁLISIS\n"];
+  lines.push(`Período: ${days[0]?.date} al ${days[days.length-1]?.date}`);
+  lines.push(`Metas: 2,200 kcal · 125g proteína · 154g carbs · 65g grasa\n`);
+
+  let trackedDays = 0;
+  let totalKcal = 0, totalProt = 0;
+
+  days.forEach(day => {
+    const data = JSON.parse(localStorage.getItem("day_" + day.date) || "null");
+    if (!data) {
+      lines.push(`${day.label}: Sin registro`);
+      return;
+    }
+    trackedDays++;
+    totalKcal += day.kcal;
+    totalProt += day.prot;
+
+    lines.push(`\n📅 ${day.label} — ${Math.round(day.kcal)} kcal · ${Math.round(day.prot)}g prot`);
+
+    ["desayuno", "comida", "cena"].forEach(meal => {
+      const mealData = data[meal] || {};
+      const items = Object.values(mealData);
+      if (items.length === 0) return;
+      const mealLabel = { desayuno: "🌅 Desayuno", comida: "☀️ Comida", cena: "🌙 Cena" }[meal];
+      const mealKcal = items.reduce((a, i) => a + i.kcal * i.count, 0);
+      const mealProt = items.reduce((a, i) => a + i.prot * i.count, 0);
+      lines.push(`  ${mealLabel} (${Math.round(mealKcal)} kcal · ${Math.round(mealProt)}g prot):`);
+      items.forEach(item => {
+        lines.push(`    - ${item.count > 1 ? item.count + "x " : ""}${item.name} (${item.kcal * item.count} kcal · ${item.prot * item.count}g prot)`);
+      });
+    });
+  });
+
+  if (trackedDays > 0) {
+    lines.push(`\n📈 RESUMEN DE SEMANA:`);
+    lines.push(`Días registrados: ${trackedDays}/7`);
+    lines.push(`Promedio kcal: ${Math.round(totalKcal / trackedDays)} (meta 2,200)`);
+    lines.push(`Promedio proteína: ${Math.round(totalProt / trackedDays)}g (meta 125g)`);
+  }
+
+  return lines.join("\n");
+}
+
 export default function Weekly({ onDayPress }) {
+  const [copied, setCopied] = useState(false);
   const days = getLastNDays(7);
   const avg = {
     kcal: Math.round(days.reduce((a, d) => a + d.kcal, 0) / 7),
@@ -86,6 +132,28 @@ export default function Weekly({ onDayPress }) {
             </div>
           );
         })}
+      </div>
+    </div>
+
+      {/* Export button */}
+      <div style={{ margin: "16px 0 8px" }}>
+        <button
+          onClick={() => {
+            const text = exportWeekData(days);
+            navigator.clipboard.writeText(text).then(() => {
+              setCopied(true);
+              setTimeout(() => setCopied(false), 3000);
+            });
+          }}
+          style={{ width: "100%", padding: "14px", background: copied ? "#4A9F2A" : "#1A1A1A", color: "#fff", border: "none", borderRadius: 12, fontSize: 14, fontWeight: 600, cursor: "pointer" }}
+        >
+          {copied ? "✓ Copiado, pégalo en el chat con Claude" : "📋 Exportar semana para análisis con Claude"}
+        </button>
+        {copied && (
+          <div style={{ fontSize: 12, color: "#4A9F2A", textAlign: "center", marginTop: 8 }}>
+            Ve a Claude y pega el texto para recibir tu análisis personalizado
+          </div>
+        )}
       </div>
     </div>
   );
