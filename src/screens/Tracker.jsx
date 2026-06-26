@@ -30,10 +30,11 @@ function getEquivMsg(macro, value, goal) {
       { limit: 999, text: "más de 2 cucharadas de aceite" },
     ],
     sugar: [
-      { limit: 10, text: "2 cucharaditas de azúcar" },
-      { limit: 20, text: "medio refresco normal" },
-      { limit: 35, text: "una lata de refresco" },
-      { limit: 999, text: "más de una lata de refresco en azúcar" },
+      { limit: 7, text: "1 dátil con chocolate" },
+      { limit: 14, text: "2 dátiles con chocolate" },
+      { limit: 21, text: "3 dátiles con chocolate" },
+      { limit: 35, text: "un puñado de uvas verdes (~130g)" },
+      { limit: 999, text: "más de 2 puñados de uvas verdes en azúcar" },
     ],
   };
   const labels = { carb: "carbs", fat: "grasa", sugar: "azúcar" };

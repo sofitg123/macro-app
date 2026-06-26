@@ -63,7 +63,8 @@ export const FOODS = {
       { id: "manchego", name: "Queso manchego", portion: "30g", kcal: 108, prot: 7, carb: 0, fat: 9, sugar: 0, flag: "yellow", gluten: false },
       { id: "chocolate_lindt85", name: "Lindt 85%", portion: "18g", kcal: 105, prot: 2, carb: 4, fat: 9, sugar: 2, flag: "green", gluten: false },
       { id: "chocolate_lindt80", name: "Lindt 80%", portion: "18g", kcal: 108, prot: 2, carb: 6, fat: 9, sugar: 3, flag: "green", gluten: false },
-      { id: "datil", name: "Dátil", portion: "1 pieza ~8g", kcal: 23, prot: 0, carb: 6, fat: 0, sugar: 5, flag: "yellow", gluten: false },
+      { id: "datil", name: "Dátil solo", portion: "1 pieza ~8g", kcal: 23, prot: 0, carb: 6, fat: 0, sugar: 5, flag: "yellow", gluten: false },
+      { id: "datil_chocolate", name: "Dátil con Lindt 80% derretido", portion: "1 pieza con ~5g choco", kcal: 58, prot: 0, carb: 10, fat: 2, sugar: 7, flag: "yellow", gluten: false },
     ],
   },
   fruta: {
@@ -74,6 +75,7 @@ export const FOODS = {
       { id: "melon", name: "Melón", portion: "120g", kcal: 43, prot: 1, carb: 11, fat: 0, sugar: 10, flag: "green", gluten: false },
       { id: "jicama", name: "Jícama", portion: "100g", kcal: 40, prot: 1, carb: 9, fat: 0, sugar: 2, flag: "green", gluten: false },
       { id: "platano", name: "Plátano pequeño", portion: "80g", kcal: 72, prot: 1, carb: 19, fat: 0, sugar: 10, flag: "green", gluten: false },
+      { id: "uvas_verdes", name: "Uvas verdes", portion: "100g (~20 uvas)", kcal: 55, prot: 1, carb: 15, fat: 0, sugar: 15, flag: "green", gluten: false },
     ],
   },
   verdura: {
