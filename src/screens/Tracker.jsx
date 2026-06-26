@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { FOODS } from "../foods";
 import { DAILY_GOALS, calcTotals } from "../storage";
+
 const SUGAR_GOAL = 25;
 const KCAL_GOAL = 2200;
 
-
 const FLAG_COLOR = { green: "#4A9F2A", yellow: "#C08020", red: "#C03030" };
-
-
 
 function getEquivMsg(macro, value, goal) {
   const over = value - goal;
+  if (macro === "prot") {
+    if (over <= 0) return null;
+    return `+${Math.round(over)}g proteína extra 💪 eso protege tu músculo y te mantiene saciada.`;
+  }
   if (over <= 0) return null;
   const equiv = {
     carb: [
@@ -34,70 +36,32 @@ function getEquivMsg(macro, value, goal) {
       { limit: 999, text: "más de una lata de refresco en azúcar" },
     ],
   };
-  if (macro === "prot") {
-    const extra = Math.round(value - goal);
-    if (extra <= 0) return null;
-    return `+${extra}g proteína extra 💪 eso protege tu músculo y te mantiene saciada.`;
-  }
   const labels = { carb: "carbs", fat: "grasa", sugar: "azúcar" };
   const list = equiv[macro];
   if (!list) return null;
   const match = list.find(e => over <= e.limit);
-  const text = match ? match.text : list[list.length-1].text;
+  const text = match ? match.text : list[list.length - 1].text;
   return `Te pasaste ${Math.round(over)}g de ${labels[macro]}, como comer ${text} extra.`;
 }
 
-function getSurplusMessage(kcalOver) { // kcalOver is vs 2200
+function getSurplusMessage(kcalOver) {
   if (kcalOver <= 0) return null;
   if (kcalOver < 200) return { msg: "Estás ligeramente arriba. Una cena ligera de proteína y verdura lo equilibra.", color: "#B07000", bg: "#FFF8E8" };
   if (kcalOver < 500) return { msg: "Hoy fue un día más alto. No hay que compensar mañana, solo vuelve a tu plan normal.", color: "#B07000", bg: "#FFF8E8" };
-  if (kcalOver < 800) return { msg: "Día social, pasa. Si cenas solo proteína el impacto real en la semana es mínimo.", color: "#8A5000", bg: "#FFF0D6" };
+  if (kcalOver < 800) return { msg: "Día social, pasa. Si cenas solo proteína el impacto real es mínimo.", color: "#8A5000", bg: "#FFF0D6" };
   return { msg: "Hoy fue un día libre. Mañana desayuna bien con proteína y sigue normal. Un día no define nada.", color: "#666", bg: "#F5F5F5" };
-}
-
-
-function HungerSelector({ meal, hunger, onSelect }) {
-  const options = [
-    { value: "satisfecha", label: "😌 Satisfecha" },
-    { value: "podria_mas", label: "🤔 Podría comer más" },
-    { value: "hambrienta", label: "😤 Me quedé hambrienta" },
-  ];
-  return (
-    <div style={{ background: "#fff", borderRadius: 14, padding: "14px 16px", marginBottom: 10, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
-      <div style={{ fontSize: 12, color: "#999", marginBottom: 10 }}>¿Cómo quedaste después de este tiempo?</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        {options.map(opt => (
-          <div
-            key={opt.value}
-            onClick={() => onSelect(meal, opt.value)}
-            style={{
-              padding: "10px 14px",
-              borderRadius: 10,
-              background: hunger === opt.value ? "#1A1A1A" : "#F7F5F0",
-              color: hunger === opt.value ? "#fff" : "#444",
-              fontSize: 14,
-              fontWeight: hunger === opt.value ? 600 : 400,
-              cursor: "pointer",
-              transition: "all 0.15s",
-            }}
-          >
-            {opt.label}
-          </div>
-        ))}
-      {/* Hunger selector */}
-      <HungerSelector
-        meal={activeMeal}
-        hunger={hunger[activeMeal]}
-        onSelect={handleHunger}
-      />
-    </div>
-  );
 }
 
 const MEALS = [
   { id: "desayuno", label: "Desayuno", emoji: "🌅" },
   { id: "comida", label: "Comida", emoji: "☀️" },
   { id: "cena", label: "Cena", emoji: "🌙" },
+];
+
+const HUNGER_OPTIONS = [
+  { value: "satisfecha", label: "😌 Satisfecha" },
+  { value: "podria_mas", label: "🤔 Podría comer más" },
+  { value: "hambrienta", label: "😤 Me quedé hambrienta" },
 ];
 
 function MacroBar({ label, value, goal, color }) {
@@ -113,12 +77,7 @@ function MacroBar({ label, value, goal, color }) {
       </div>
       <div style={{ background: "#EBEBEB", borderRadius: 4, height: 5, overflow: "hidden" }}>
         <div style={{ height: "100%", borderRadius: 4, background: over ? "#C03030" : color, width: `${pct}%`, transition: "width 0.3s" }} />
-      {/* Hunger selector */}
-      <HungerSelector
-        meal={activeMeal}
-        hunger={hunger[activeMeal]}
-        onSelect={handleHunger}
-      />
+      </div>
     </div>
   );
 }
@@ -127,7 +86,7 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
   const [activeMeal, setActiveMeal] = useState("desayuno");
   const [openGroup, setOpenGroup] = useState("proteina");
   const [hunger, setHunger] = useState(() => {
-    try { return JSON.parse(localStorage.getItem("hunger_" + (date || "")) || "{}"); } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem("hunger_" + date) || "{}"); } catch { return {}; }
   });
 
   const mealTotals = {
@@ -137,11 +96,8 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
   };
   const dayTotals = calcTotals(data);
   const remaining = {
-    kcal: DAILY_GOALS.kcal - dayTotals.kcal,
+    kcal: KCAL_GOAL - dayTotals.kcal,
     prot: DAILY_GOALS.prot - dayTotals.prot,
-    carb: DAILY_GOALS.carb - dayTotals.carb,
-    fat: DAILY_GOALS.fat - dayTotals.fat,
-    sugar: SUGAR_GOAL - (dayTotals.sugar || 0),
   };
 
   const toggleFood = (foodId, food) => {
@@ -178,37 +134,40 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
     <div>
       {/* Header */}
       <div style={{ background: "#fff", padding: "16px 16px 14px", position: "sticky", top: 0, zIndex: 20, borderBottom: "1px solid #EBEBEB", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
+        {!isToday && (
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10, background: "#FFF0D6", borderRadius: 8, padding: "8px 12px" }}>
+            <span style={{ fontSize: 12, color: "#B07000", fontWeight: 600 }}>📅 Editando: {new Date(date + "T12:00:00").toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" })}</span>
+            <button onClick={onBackToToday} style={{ fontSize: 11, color: "#B07000", background: "transparent", border: "1px solid #B07000", borderRadius: 6, padding: "3px 8px", cursor: "pointer" }}>Volver a hoy</button>
+          </div>
+        )}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: "#1A1A1A" }}>Total del día</span>
           <span style={{ fontSize: 11, color: "#bbb" }}>Meta: 2,200 kcal · 125g prot</span>
         </div>
-        <MacroBar label="kcal" value={dayTotals.kcal} goal={DAILY_GOALS.kcal} color="#4A9F2A" />
+        <MacroBar label="kcal" value={dayTotals.kcal} goal={KCAL_GOAL} color="#4A9F2A" />
         <MacroBar label="proteína" value={dayTotals.prot} goal={DAILY_GOALS.prot} color="#2A80C0" />
         <MacroBar label="carbs" value={dayTotals.carb} goal={DAILY_GOALS.carb} color="#C08020" />
         <MacroBar label="grasa" value={dayTotals.fat} goal={DAILY_GOALS.fat} color="#C04040" />
         <MacroBar label="azúcar" value={dayTotals.sugar || 0} goal={SUGAR_GOAL} color="#9B59B6" />
-        {["prot","carb","fat","sugar"].map(macro => {
-          const vals = { prot: [dayTotals.prot, DAILY_GOALS.prot], carb: [dayTotals.carb, DAILY_GOALS.carb], fat: [dayTotals.fat, DAILY_GOALS.fat], sugar: [dayTotals.sugar||0, SUGAR_GOAL] };
+        {["prot", "carb", "fat", "sugar"].map(macro => {
+          const vals = { prot: [dayTotals.prot, DAILY_GOALS.prot], carb: [dayTotals.carb, DAILY_GOALS.carb], fat: [dayTotals.fat, DAILY_GOALS.fat], sugar: [dayTotals.sugar || 0, SUGAR_GOAL] };
           const msg = getEquivMsg(macro, vals[macro][0], vals[macro][1]);
           const isGood = macro === "prot";
           return msg ? <div key={macro} style={{ fontSize: 11, color: isGood ? "#2A7A2A" : "#A03030", marginTop: 3, paddingLeft: 2 }}>{isGood ? "" : "↑ "}{msg}</div> : null;
         })}
         <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
           {[
-            { key: "kcal", label: "restantes", color: "#4A9F2A", unit: "kcal" },
-            { key: "prot", label: "prot", color: "#2A80C0", unit: "g" },
-            { key: "carb", label: "carbs", color: "#C08020", unit: "g" },
-            { key: "fat", label: "grasa", color: "#C04040", unit: "g" },
-            { key: "sugar", label: "azúcar", color: "#9B59B6", unit: "g" },
-          ].map(({ key, label, color, unit }) => {
-            const rem = Math.round(remaining[key]);
+            { key: "kcal", label: "restantes", color: "#4A9F2A", unit: "kcal", val: remaining.kcal },
+            { key: "prot", label: "prot", color: "#2A80C0", unit: "g", val: remaining.prot },
+          ].map(({ key, label, color, unit, val }) => {
+            const rem = Math.round(val);
             const over = rem < 0;
             return (
-              <div key={key} style={{ flex: 1, background: "#F7F5F0", borderRadius: 8, padding: "6px 4px", textAlign: "center" }}>
-                <div style={{ fontSize: 12, fontFamily: "monospace", fontWeight: 700, color: over ? "#C03030" : color }}>
+              <div key={key} style={{ flex: 1, background: "#F7F5F0", borderRadius: 8, padding: "10px 8px", textAlign: "center" }}>
+                <div style={{ fontSize: 13, fontFamily: "monospace", fontWeight: 700, color: over ? "#888" : color }}>
                   {over ? `+${Math.abs(rem)}` : rem}{unit}
                 </div>
-                <div style={{ fontSize: 9, color: "#bbb", marginTop: 1 }}>{over ? "de más" : label}</div>
+                <div style={{ fontSize: 10, color: "#bbb", marginTop: 1 }}>{over ? "extra" : label}</div>
               </div>
             );
           })}
@@ -227,11 +186,13 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
         {MEALS.map(meal => {
           const t = mealTotals[meal.id];
           const isActive = activeMeal === meal.id;
+          const h = hunger[meal.id];
           return (
             <div key={meal.id} onClick={() => setActiveMeal(meal.id)} style={{ flex: 1, padding: "10px 4px 8px", textAlign: "center", cursor: "pointer", borderBottom: isActive ? "2px solid #1A1A1A" : "2px solid transparent" }}>
               <div style={{ fontSize: 18 }}>{meal.emoji}</div>
               <div style={{ fontSize: 12, fontWeight: isActive ? 700 : 400, color: isActive ? "#1A1A1A" : "#bbb", marginTop: 2 }}>{meal.label}</div>
               {t.kcal > 0 && <div style={{ fontSize: 10, fontFamily: "monospace", color: "#888", marginTop: 1 }}>{Math.round(t.kcal)} kcal</div>}
+              {h && <div style={{ fontSize: 10, marginTop: 1 }}>{h === "satisfecha" ? "😌" : h === "podria_mas" ? "🤔" : "😤"}</div>}
             </div>
           );
         })}
@@ -284,10 +245,10 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
                       <div key={food.id} onClick={() => toggleFood(food.id, food)} style={{ display: "flex", alignItems: "center", padding: "10px 14px", cursor: "pointer", background: count > 0 ? group.color : "transparent", borderBottom: "1px solid #F8F8F8" }}>
                         <div style={{ flex: 1 }}>
                           <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                          <span style={{ width: 8, height: 8, borderRadius: "50%", background: FLAG_COLOR[food.flag] || "#999", display: "inline-block", flexShrink: 0 }} />
-                          <span style={{ fontSize: 14, fontWeight: count > 0 ? 600 : 400, color: count > 0 ? group.textColor : "#1A1A1A" }}>{food.name}</span>
-                          {food.gluten && <span style={{ fontSize: 11 }}>🌾</span>}
-                        </div>
+                            <span style={{ width: 8, height: 8, borderRadius: "50%", background: FLAG_COLOR[food.flag] || "#999", display: "inline-block", flexShrink: 0 }} />
+                            <span style={{ fontSize: 14, fontWeight: count > 0 ? 600 : 400, color: count > 0 ? group.textColor : "#1A1A1A" }}>{food.name}</span>
+                            {food.gluten && <span style={{ fontSize: 11 }}>🌾</span>}
+                          </div>
                           <div style={{ fontSize: 12, color: "#999", marginTop: 1 }}>{food.portion}</div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -310,12 +271,23 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
             </div>
           );
         })}
-      {/* Hunger selector */}
-      <HungerSelector
-        meal={activeMeal}
-        hunger={hunger[activeMeal]}
-        onSelect={handleHunger}
-      />
+
+        {/* Hunger selector */}
+        <div style={{ background: "#fff", borderRadius: 14, padding: "14px 16px", marginBottom: 10, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+          <div style={{ fontSize: 12, color: "#999", marginBottom: 10 }}>¿Cómo quedaste después de {activeMeal === "desayuno" ? "el desayuno" : activeMeal === "comida" ? "la comida" : "la cena"}?</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {HUNGER_OPTIONS.map(opt => (
+              <div
+                key={opt.value}
+                onClick={() => handleHunger(activeMeal, opt.value)}
+                style={{ padding: "10px 14px", borderRadius: 10, background: hunger[activeMeal] === opt.value ? "#1A1A1A" : "#F7F5F0", color: hunger[activeMeal] === opt.value ? "#fff" : "#444", fontSize: 14, fontWeight: hunger[activeMeal] === opt.value ? 600 : 400, cursor: "pointer" }}
+              >
+                {opt.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
