@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FOODS } from "../foods";
 import { DAILY_GOALS, calcTotals } from "../storage";
 
-const SUGAR_GOAL = 25;
+const SUGAR_GOAL = 45;
 const KCAL_GOAL = 2200;
 
 const FLAG_COLOR = { green: "#4A9F2A", yellow: "#C08020", red: "#C03030" };
