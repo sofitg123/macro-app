@@ -55,6 +55,45 @@ function getSurplusMessage(kcalOver) { // kcalOver is vs 2200
   return { msg: "Hoy fue un día libre. Mañana desayuna bien con proteína y sigue normal. Un día no define nada.", color: "#666", bg: "#F5F5F5" };
 }
 
+
+function HungerSelector({ meal, hunger, onSelect }) {
+  const options = [
+    { value: "satisfecha", label: "😌 Satisfecha" },
+    { value: "podria_mas", label: "🤔 Podría comer más" },
+    { value: "hambrienta", label: "😤 Me quedé hambrienta" },
+  ];
+  return (
+    <div style={{ background: "#fff", borderRadius: 14, padding: "14px 16px", marginBottom: 10, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+      <div style={{ fontSize: 12, color: "#999", marginBottom: 10 }}>¿Cómo quedaste después de este tiempo?</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {options.map(opt => (
+          <div
+            key={opt.value}
+            onClick={() => onSelect(meal, opt.value)}
+            style={{
+              padding: "10px 14px",
+              borderRadius: 10,
+              background: hunger === opt.value ? "#1A1A1A" : "#F7F5F0",
+              color: hunger === opt.value ? "#fff" : "#444",
+              fontSize: 14,
+              fontWeight: hunger === opt.value ? 600 : 400,
+              cursor: "pointer",
+              transition: "all 0.15s",
+            }}
+          >
+            {opt.label}
+          </div>
+        ))}
+      {/* Hunger selector */}
+      <HungerSelector
+        meal={activeMeal}
+        hunger={hunger[activeMeal]}
+        onSelect={handleHunger}
+      />
+    </div>
+  );
+}
+
 const MEALS = [
   { id: "desayuno", label: "Desayuno", emoji: "🌅" },
   { id: "comida", label: "Comida", emoji: "☀️" },
@@ -74,7 +113,12 @@ function MacroBar({ label, value, goal, color }) {
       </div>
       <div style={{ background: "#EBEBEB", borderRadius: 4, height: 5, overflow: "hidden" }}>
         <div style={{ height: "100%", borderRadius: 4, background: over ? "#C03030" : color, width: `${pct}%`, transition: "width 0.3s" }} />
-      </div>
+      {/* Hunger selector */}
+      <HungerSelector
+        meal={activeMeal}
+        hunger={hunger[activeMeal]}
+        onSelect={handleHunger}
+      />
     </div>
   );
 }
@@ -82,6 +126,9 @@ function MacroBar({ label, value, goal, color }) {
 export default function Tracker({ data, setData, date, isToday, onBackToToday }) {
   const [activeMeal, setActiveMeal] = useState("desayuno");
   const [openGroup, setOpenGroup] = useState("proteina");
+  const [hunger, setHunger] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("hunger_" + (date || "")) || "{}"); } catch { return {}; }
+  });
 
   const mealTotals = {
     desayuno: calcTotals({ desayuno: data.desayuno, comida: {}, cena: {} }),
@@ -116,6 +163,12 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
       else meal[foodId] = { ...meal[foodId], count: meal[foodId].count - 1 };
       return { ...prev, [activeMeal]: meal };
     });
+  };
+
+  const handleHunger = (meal, value) => {
+    const updated = { ...hunger, [meal]: value };
+    setHunger(updated);
+    try { localStorage.setItem("hunger_" + date, JSON.stringify(updated)); } catch {}
   };
 
   const currentMeal = data[activeMeal] || {};
@@ -257,7 +310,12 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
             </div>
           );
         })}
-      </div>
+      {/* Hunger selector */}
+      <HungerSelector
+        meal={activeMeal}
+        hunger={hunger[activeMeal]}
+        onSelect={handleHunger}
+      />
     </div>
   );
 }

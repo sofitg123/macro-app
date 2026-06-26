@@ -23,6 +23,8 @@ function exportWeekData(days) {
 
     lines.push(`\n📅 ${day.label} — ${Math.round(day.kcal)} kcal · ${Math.round(day.prot)}g prot`);
 
+    const hungerData = JSON.parse(localStorage.getItem("hunger_" + day.date) || "{}");
+    const hungerLabel = { satisfecha: "😌 Satisfecha", podria_mas: "🤔 Podría comer más", hambrienta: "😤 Me quedé hambrienta" };
     ["desayuno", "comida", "cena"].forEach(meal => {
       const mealData = data[meal] || {};
       const items = Object.values(mealData);
@@ -30,7 +32,8 @@ function exportWeekData(days) {
       const mealLabel = { desayuno: "🌅 Desayuno", comida: "☀️ Comida", cena: "🌙 Cena" }[meal];
       const mealKcal = items.reduce((a, i) => a + i.kcal * i.count, 0);
       const mealProt = items.reduce((a, i) => a + i.prot * i.count, 0);
-      lines.push(`  ${mealLabel} (${Math.round(mealKcal)} kcal · ${Math.round(mealProt)}g prot):`);
+      const h = hungerData[meal] ? ` — ${hungerLabel[hungerData[meal]]}` : "";
+      lines.push(`  ${mealLabel} (${Math.round(mealKcal)} kcal · ${Math.round(mealProt)}g prot)${h}:`);
       items.forEach(item => {
         lines.push(`    - ${item.count > 1 ? item.count + "x " : ""}${item.name} (${item.kcal * item.count} kcal · ${item.prot * item.count}g prot)`);
       });
