@@ -41,6 +41,8 @@ export const FOODS = {
       { id: "pan_cero_cero", name: "Pan Cero Cero Bimbo", portion: "1 rebanada ~27g", kcal: 69, prot: 3, carb: 13, fat: 0, sugar: 0, flag: "red", gluten: true },
       { id: "tostada_melba", name: "Tostada Melba", portion: "3 piezas", kcal: 75, prot: 2, carb: 15, fat: 1, sugar: 0, flag: "yellow", gluten: true },
       { id: "frijol", name: "Frijoles de olla", portion: "60g", kcal: 80, prot: 5, carb: 14, fat: 0, sugar: 0, flag: "green", gluten: false },
+      { id: "frijol_sierra", name: "Frijol La Sierra bayo refrito", portion: "media taza ~120g", kcal: 110, prot: 5, carb: 12, fat: 5, sugar: 0, flag: "yellow", gluten: false },
+      { id: "frijol_bayo_bolsa", name: "Frijol bayo refrito de bolsa", portion: "media taza ~130g", kcal: 99, prot: 4, carb: 9, fat: 5, sugar: 0, flag: "yellow", gluten: false },
       { id: "avena", name: "Avena en hojuela", portion: "40g", kcal: 150, prot: 5, carb: 27, fat: 3, sugar: 1, flag: "green", gluten: false },
       { id: "arroz", name: "Arroz blanco cocido", portion: "100g", kcal: 130, prot: 3, carb: 28, fat: 0, sugar: 0, flag: "yellow", gluten: false },
       { id: "quinoa", name: "Quinoa cocida", portion: "100g", kcal: 120, prot: 4, carb: 22, fat: 2, sugar: 0, flag: "green", gluten: false },
