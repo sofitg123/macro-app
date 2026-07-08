@@ -101,6 +101,16 @@ export const FOODS = {
       { id: "cuba", name: "Cuba Bacardi + Coca Zero", portion: "45ml Bacardi", kcal: 100, prot: 0, carb: 0, fat: 0, sugar: 0, flag: "yellow", gluten: false },
     ],
   },
+  recetas: {
+    label: "Recetas caseras", emoji: "🍲", color: "#E8F4FF", textColor: "#00508A",
+    items: [
+      { id: "sopa_nopal", name: "Sopa de nopal (1 plato)", portion: "300ml aprox", kcal: 120, prot: 6, carb: 14, fat: 3, sugar: 1, flag: "green", gluten: false },
+      { id: "sopa_calabacin", name: "Sopa de calabacín (1 plato)", portion: "300ml aprox", kcal: 90, prot: 4, carb: 10, fat: 3, sugar: 4, flag: "green", gluten: false },
+      { id: "tasajo", name: "Tasajo asado", portion: "250g", kcal: 380, prot: 48, carb: 0, fat: 20, sugar: 0, flag: "yellow", gluten: false },
+      { id: "aguachile_cecina", name: "Aguachile de cecina (sin aguacate)", portion: "1 porción ~150g", kcal: 280, prot: 30, carb: 12, fat: 12, sugar: 2, flag: "green", gluten: false },
+      { id: "agua_mango", name: "Agua de mango natural", portion: "250ml", kcal: 95, prot: 1, carb: 24, fat: 0, sugar: 22, flag: "yellow", gluten: false },
+    ],
+  },
   antojo: {
     label: "Antojos", emoji: "🍫", color: "#F5F5F5", textColor: "#555",
     items: [
