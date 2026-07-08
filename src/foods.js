@@ -16,6 +16,7 @@ export const FOODS = {
       { id: "carne_molida", name: "Carne molida 90%", portion: "200g", kcal: 280, prot: 44, carb: 0, fat: 12, sugar: 0, flag: "green", gluten: false },
       { id: "turkey", name: "Turkey patty", portion: "100g", kcal: 160, prot: 22, carb: 0, fat: 8, sugar: 0, flag: "yellow", gluten: false },
       { id: "jamon_pavo", name: "Jamón de pavo", portion: "60g", kcal: 65, prot: 10, carb: 1, fat: 2, sugar: 0, flag: "red", gluten: false },
+      { id: "salchichas_pavo", name: "Salchichas de pavo San Rafael asadas (2 pzas)", portion: "2 piezas ~80g", kcal: 120, prot: 10, carb: 2, fat: 8, sugar: 0, flag: "yellow", gluten: false },
       { id: "cottage", name: "Queso cottage", portion: "150g", kcal: 130, prot: 18, carb: 4, fat: 3, sugar: 3, flag: "green", gluten: false },
       { id: "edamames", name: "Edamames", portion: "80g", kcal: 95, prot: 8, carb: 7, fat: 4, sugar: 1, flag: "green", gluten: false },
       { id: "colageno", name: "Colágeno Vital Proteins", portion: "1 scoop ~10g", kcal: 35, prot: 9, carb: 0, fat: 0, sugar: 0, flag: "green", gluten: false },
