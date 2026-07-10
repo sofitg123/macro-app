@@ -30,6 +30,8 @@ export const FOODS = {
       { id: "oikos", name: "Yogur Oikos", portion: "150g", kcal: 141, prot: 12, carb: 12, fat: 3, sugar: 6, flag: "yellow", gluten: false },
       { id: "leche_light", name: "Leche Santa Clara light", portion: "150ml", kcal: 55, prot: 5, carb: 6, fat: 1, sugar: 6, flag: "yellow", gluten: false },
       { id: "kefir", name: "Kefir shot", portion: "30ml", kcal: 18, prot: 1, carb: 2, fat: 0, sugar: 2, flag: "green", gluten: false },
+      { id: "leche_deslactosada_santa_clara_medio", name: "Leche deslactosada Santa Clara", portion: "1/2 taza (120ml)", kcal: 61, prot: 4, carb: 7, fat: 2, sugar: 6, flag: "green", gluten: false },
+      { id: "queso_panela_30g", name: "Queso panela", portion: "1 rebanada (30g)", kcal: 44, prot: 5, carb: 2, fat: 2, sugar: 0, flag: "yellow", gluten: false },
     ],
   },
   carb: {
@@ -48,7 +50,9 @@ export const FOODS = {
       { id: "quinoa", name: "Quinoa cocida", portion: "media taza ~90g", kcal: 110, prot: 4, carb: 20, fat: 2, sugar: 0, flag: "green", gluten: false },
       { id: "papa", name: "Papa horneada en gajos", portion: "200g", kcal: 160, prot: 4, carb: 36, fat: 1, sugar: 1, flag: "green", gluten: false },
       { id: "pasta_normal", name: "Pasta normal cocida", portion: "150g", kcal: 220, prot: 8, carb: 43, fat: 1, sugar: 1, flag: "red", gluten: true },
-      { id: "pasta_proteina", name: "Pasta proteína Chedraui", portion: "85g seca", kcal: 310, prot: 25, carb: 40, fat: 3, sugar: 2, flag: "yellow", gluten: true },
+      { id: "pasta_proteina", name: "Pasta proteína Chedraui", portion: "85g seca", kcal: 310, prot: 25, carb: 40, fat: 3, sugar: 2, flag: "yellow", gluten: true }, 
+      { id: "frijoles_negros_tercio", name: "Frijoles negros hervidos", portion: "1/3 taza (~80g)", kcal: 75, prot: 5, carb: 13, fat: 1, sugar: 0, flag: "green", gluten: false },
+      { id: "frijoles_negros_medio", name: "Frijoles negros hervidos", portion: "1/2 taza (~120g)", kcal: 113, prot: 8, carb: 20, fat: 1, sugar: 0, flag: "green", gluten: false },
     ],
   },
   grasa: {
@@ -131,6 +135,9 @@ export const FOODS = {
       { id: "pizza_mariscos", name: "Pizza Toscana mariscos c/tocino", portion: "1 rebanada ~120g", kcal: 350, prot: 15, carb: 32, fat: 16, sugar: 2, flag: "yellow", gluten: true },
       { id: "polvorones", name: "Polvorones Marinela (4 galletas)", portion: "4 piezas ~56g", kcal: 290, prot: 2, carb: 36, fat: 16, sugar: 18, flag: "red", gluten: true },
       { id: "tostada_atun", name: "Tostada de atún (Milpa Real)", portion: "1 tostada completa", kcal: 360, prot: 18, carb: 22, fat: 18, sugar: 1, flag: "yellow", gluten: false },
+      { id: "carlos_v_18g", name: "Carlos V", portion: "1 barra (18g)", kcal: 93, prot: 1, carb: 11, fat: 5, sugar: 11, flag: "red", gluten: true },
+      { id: "chips_fuego_60g", name: "Chips Fuego Barcel", portion: "bolsa (60g)", kcal: 275, prot: 4, carb: 31, fat: 15, sugar: 1, flag: "red", gluten: true },
+      { id: "oreos_4", name: "Oreos", portion: "4 galletas (36g)", kcal: 170, prot: 2, carb: 25, fat: 7, sugar: 14, flag: "red", gluten: true },
     ],
   },
 };
