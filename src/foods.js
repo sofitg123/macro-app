@@ -138,7 +138,7 @@ export const FOODS = {
       { id: "polvorones", name: "Polvorones Marinela (4 galletas)", portion: "4 piezas ~56g", kcal: 290, prot: 2, carb: 36, fat: 16, sugar: 18, flag: "red", gluten: true },
       { id: "tostada_atun", name: "Tostada de atún (Milpa Real)", portion: "1 tostada completa", kcal: 360, prot: 18, carb: 22, fat: 18, sugar: 1, flag: "yellow", gluten: false },
       { id: "carlos_v_18g", name: "Carlos V", portion: "1 barra (18g)", kcal: 93, prot: 1, carb: 11, fat: 5, sugar: 11, flag: "red", gluten: true },
-      { id: "chips_fuego_60g", name: "Chips Fuego Barcel", portion: "bolsa (60g)", kcal: 274, prot: 4, carb: 35, fat: 15, sugar: 1, flag: "red", gluten: true },      { id: "oreos_4", name: "Oreos", portion: "4 galletas (36g)", kcal: 170, prot: 2, carb: 25, fat: 7, sugar: 14, flag: "red", gluten: true },
+      { id: "chips_fuego_60g", name: "Chips Fuego Barcel", portion: "bolsa (60g)", kcal: 274, prot: 4, carb: 35, fat: 15, sugar: 1, flag: "red", gluten: true },     
       { id: "lindt_lindor_leche_18g", name: "Lindt Lindor Leche", portion: "1.5 esferas (18g)", kcal: 120, prot: 2, carb: 8, fat: 9, sugar: 7, flag: "red", gluten: true },
       { id: "palomitas_caseras_naturales_105g", name: "Palomitas caseras naturales", portion: "105g reventadas", kcal: 406, prot: 14, carb: 81, fat: 5, sugar: 0, flag: "green", gluten: false },
       { id: "palomitas_caseras_mantequilla_105g", name: "Palomitas caseras con mantequilla", portion: "105g reventadas + 1 cda mantequilla", kcal: 508, prot: 14, carb: 81, fat: 17, sugar: 0, flag: "yellow", gluten: false },
