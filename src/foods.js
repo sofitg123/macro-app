@@ -142,6 +142,7 @@ export const FOODS = {
       { id: "lindt_lindor_leche_18g", name: "Lindt Lindor Leche", portion: "1.5 esferas (18g)", kcal: 120, prot: 2, carb: 8, fat: 9, sugar: 7, flag: "red", gluten: true },
       { id: "palomitas_caseras_naturales_105g", name: "Palomitas caseras naturales", portion: "105g reventadas", kcal: 406, prot: 14, carb: 81, fat: 5, sugar: 0, flag: "green", gluten: false },
       { id: "palomitas_caseras_mantequilla_105g", name: "Palomitas caseras con mantequilla", portion: "105g reventadas + 1 cda mantequilla", kcal: 508, prot: 14, carb: 81, fat: 17, sugar: 0, flag: "yellow", gluten: false },
-      { id: "slim_pop_limon_110g", name: "Palomitas Slim Pop limón", portion: "bolsa grande (110g)", kcal: 505, prot: 8, carb: 46, fat: 32, sugar: 4, flag: "yellow", gluten: false },    ],
+      { id: "slim_pop_limon_110g", name: "Palomitas Slim Pop limón", portion: "bolsa grande (110g)", kcal: 505, prot: 8, carb: 46, fat: 32, sugar: 4, flag: "yellow", gluten: false }, 
+      { id: "oreos_6", name: "Oreos", portion: "6 galletas (~60g)", kcal: 282, prot: 3, carb: 41, fat: 12, sugar: 23, flag: "red", gluten: true },],
   },
 };
