@@ -44,6 +44,7 @@ export const FOODS = {
       { id: "tortilla", name: "Tortilla de maíz", portion: "1 pieza ~30g", kcal: 64, prot: 1, carb: 13, fat: 1, sugar: 0, flag: "green", gluten: false },
       { id: "tortilla_harina", name: "Tortillina Tía Rosa", portion: "1 pieza ~25g", kcal: 76, prot: 2, carb: 13, fat: 3, sugar: 0, flag: "red", gluten: true },
       { id: "pan_hogaza", name: "Pan hogaza/integral", portion: "1 rebanada ~35g", kcal: 85, prot: 3, carb: 16, fat: 1, sugar: 1, flag: "yellow", gluten: true },
+      { id: "salmas_1_tostada", name: "Tostada Salmas grande", portion: "1 tostada (12g)", kcal: 45, prot: 1, carb: 9, fat: 1, sugar: 0, flag: "green", gluten: false },
       { id: "pan_cero_cero", name: "Pan Cero Cero Bimbo", portion: "1 rebanada ~27g", kcal: 69, prot: 3, carb: 13, fat: 0, sugar: 0, flag: "red", gluten: true },
       { id: "tostada_melba", name: "Tostada Melba", portion: "3 piezas", kcal: 75, prot: 2, carb: 15, fat: 1, sugar: 0, flag: "yellow", gluten: true },
       { id: "frijol_sierra", name: "Frijol La Sierra bayo refrito", portion: "media taza ~120g", kcal: 110, prot: 5, carb: 12, fat: 5, sugar: 0, flag: "yellow", gluten: false },
