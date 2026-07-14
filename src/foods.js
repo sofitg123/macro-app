@@ -4,8 +4,7 @@ export const FOODS = {
     items: [
       { id: "huevo", name: "Huevo entero", portion: "1 pieza", kcal: 70, prot: 6, carb: 0, fat: 5, sugar: 0, flag: "green", gluten: false },
       { id: "clara", name: "3 Claras / 90ml", portion: "90ml", kcal: 50, prot: 11, carb: 0, fat: 0, sugar: 0, flag: "green", gluten: false },
-      { id: "salmon_fresco", name: "Salmón filete", portion: "180g", kcal: 320, prot: 36, carb: 0, fat: 18, sugar: 0, flag: "green", gluten: false },
-      { id: "salmon_ahumado", name: "Salmón ahumado", portion: "120g", kcal: 160, prot: 22, carb: 0, fat: 8, sugar: 0, flag: "yellow", gluten: false },
+{ id: "salmon_cocido_60g", name: "filete Salmón cocido", portion: "60g", kcal: 125, prot: 12, carb: 0, fat: 8, sugar: 0, flag: "green", gluten: false },      { id: "salmon_ahumado", name: "Salmón ahumado", portion: "120g", kcal: 160, prot: 22, carb: 0, fat: 8, sugar: 0, flag: "yellow", gluten: false },
       { id: "atun_lata", name: "Atún en lata", portion: "1 lata ~120g", kcal: 120, prot: 26, carb: 0, fat: 1, sugar: 0, flag: "yellow", gluten: false },
       { id: "atun_filete", name: "Atún filete", portion: "180g", kcal: 240, prot: 42, carb: 0, fat: 7, sugar: 0, flag: "green", gluten: false },
       { id: "pechuga", name: "Pechuga de pollo", portion: "180g", kcal: 235, prot: 44, carb: 0, fat: 5, sugar: 0, flag: "green", gluten: false },
