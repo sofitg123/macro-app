@@ -121,6 +121,15 @@ export const FOODS = {
 { id: "salsa_tomate_cottage", name: "Salsa tomate cottage con carne", portion: "220g", kcal: 140, prot: 21, carb: 7, fat: 5, sugar: 0, flag: "green", gluten: false },      { id: "agua_mango", name: "Agua de mango natural", portion: "250ml", kcal: 95, prot: 1, carb: 24, fat: 0, sugar: 22, flag: "yellow", gluten: false },
     ],
   },
+  jscondimento: {
+  label: "Condimentos",
+  emoji: "🧂",
+  color: "#F5F0E8",
+  textColor: "#6B5A3E",
+  items: [
+    { id: "maggi_soya_30ml", name: "Salsa de soya Maggi", portion: "30ml", kcal: 18, prot: 3, carb: 1, fat: 0, sugar: 0, flag: "yellow", gluten: true },
+  ]
+},
   antojo: {
     label: "Antojos", emoji: "🍫", color: "#F5F5F5", textColor: "#555",
     items: [
