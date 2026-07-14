@@ -101,26 +101,26 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
     prot: DAILY_GOALS.prot - dayTotals.prot,
   };
 
-  const toggleFood = (foodId, food) => {
-    setData(prev => {
-      const meal = { ...prev[activeMeal] };
-      if (!meal[foodId]) meal[foodId] = { ...food, count: 1 };
-      else if (meal[foodId].count < 10) meal[foodId] = { ...meal[foodId], count: meal[foodId].count + 1 };
-      else delete meal[foodId];
-      return { ...prev, [activeMeal]: meal };
-    });
-  };
+ const toggleFood = (foodId, food) => {
+  setData(prev => {
+    const meal = { ...prev[activeMeal] };
+    if (!meal[foodId]) meal[foodId] = { ...food, count: 0.5 };
+    else if (meal[foodId].count < 10) meal[foodId] = { ...meal[foodId], count: Math.round((meal[foodId].count + 0.5) * 10) / 10 };
+    else delete meal[foodId];
+    return { ...prev, [activeMeal]: meal };
+  });
+};
 
   const removeOne = (e, foodId) => {
-    e.stopPropagation();
-    setData(prev => {
-      const meal = { ...prev[activeMeal] };
-      if (!meal[foodId]) return prev;
-      if (meal[foodId].count <= 1) delete meal[foodId];
-      else meal[foodId] = { ...meal[foodId], count: meal[foodId].count - 1 };
-      return { ...prev, [activeMeal]: meal };
-    });
-  };
+  e.stopPropagation();
+  setData(prev => {
+    const meal = { ...prev[activeMeal] };
+    if (!meal[foodId]) return prev;
+    if (meal[foodId].count <= 0.5) delete meal[foodId];
+    else meal[foodId] = { ...meal[foodId], count: Math.round((meal[foodId].count - 0.5) * 10) / 10 };
+    return { ...prev, [activeMeal]: meal };
+  });
+};
 
   const handleHunger = (meal, value) => {
     const updated = { ...hunger, [meal]: value };
@@ -210,7 +210,7 @@ export default function Tracker({ data, setData, date, isToday, onBackToToday })
             {Object.values(currentMeal).map(item => (
               <div key={item.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: 8, marginBottom: 8, borderBottom: "1px solid #F5F5F5" }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 13 }}>{item.count > 1 ? `${item.count}× ` : ""}{item.name}</div>
+                  <div style={{ fontSize: 13 }}>{item.count > 0 ? `${item.count}× ` : ""}{item.name}</div>
                   <div style={{ fontSize: 11, color: "#999", marginTop: 1 }}>{Math.round(item.kcal * item.count)} kcal · {Math.round(item.prot * item.count)}g prot</div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
