@@ -116,8 +116,11 @@ export const FOODS = {
     items: [
       { id: "sopa_nopal", name: "Sopa de nopal (1 plato)", portion: "300ml aprox", kcal: 120, prot: 6, carb: 14, fat: 3, sugar: 1, flag: "green", gluten: false },
       { id: "sopa_calabacin", name: "Sopa de calabacín (1 plato)", portion: "300ml aprox", kcal: 90, prot: 4, carb: 10, fat: 3, sugar: 4, flag: "green", gluten: false },
+      { id: "sopa_poblano_yogur_elote_100g", name: "Sopa poblano yogur & elote", portion: "100g", kcal: 55, prot: 4, carb: 6, fat: 2, sugar: 0, flag: "green", gluten: false },
       { id: "tasajo", name: "Tasajo asado", portion: "250g", kcal: 380, prot: 48, carb: 0, fat: 20, sugar: 0, flag: "yellow", gluten: false },
+    
       { id: "aguachile_cecina", name: "Aguachile de cecina (sin aguacate)", portion: "1 porción ~150g", kcal: 280, prot: 30, carb: 12, fat: 12, sugar: 2, flag: "green", gluten: false },
+      { id: "bolognesa_pepper_yogur_200g", name: "Bolognesa Tomate Pepper Yogur", portion: "200g", kcal: 190, prot: 29, carb: 6, fat: 6, sugar: 0, flag: "green", gluten: false },
 { id: "salsa_tomate_cottage", name: "Salsa tomate cottage con carne", portion: "220g", kcal: 140, prot: 21, carb: 7, fat: 5, sugar: 0, flag: "green", gluten: false },      { id: "agua_mango", name: "Agua de mango natural", portion: "250ml", kcal: 95, prot: 1, carb: 24, fat: 0, sugar: 22, flag: "yellow", gluten: false },
     ],
   },
