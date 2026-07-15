@@ -29,6 +29,7 @@ export const FOODS = {
     items: [
       { id: "fage", name: "Yogur Fage 0%", portion: "200g", kcal: 120, prot: 20, carb: 8, fat: 0, sugar: 8, flag: "green", gluten: false },
       { id: "oikos", name: "Yogur Oikos", portion: "150g", kcal: 141, prot: 12, carb: 12, fat: 3, sugar: 6, flag: "yellow", gluten: false },
+      { id: "chobani_yogur_natural_50g", name: "Yogur Chobani natural sin grasa", portion: "50g", kcal: 27, prot: 5, carb: 2, fat: 0, sugar: 2, flag: "green", gluten: false },
       { id: "leche_light", name: "Leche Santa Clara light", portion: "150ml", kcal: 55, prot: 5, carb: 6, fat: 1, sugar: 6, flag: "yellow", gluten: false },
       { id: "kefir", name: "Kefir shot", portion: "30ml", kcal: 18, prot: 1, carb: 2, fat: 0, sugar: 2, flag: "green", gluten: false },
       { id: "leche_deslactosada_santa_clara_medio", name: "Leche deslactosada Santa Clara", portion: "1/2 taza (120ml)", kcal: 61, prot: 4, carb: 7, fat: 2, sugar: 6, flag: "green", gluten: false },
