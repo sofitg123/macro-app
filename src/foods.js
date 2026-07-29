@@ -87,6 +87,7 @@ export const FOODS = {
       { id: "jicama", name: "Jícama", portion: "100g", kcal: 40, prot: 1, carb: 9, fat: 0, sugar: 2, flag: "green", gluten: false },
       { id: "platano", name: "Plátano pequeño", portion: "80g", kcal: 72, prot: 1, carb: 19, fat: 0, sugar: 10, flag: "green", gluten: false },
       { id: "uvas_verdes", name: "Uvas verdes", portion: "100g (~20 uvas)", kcal: 55, prot: 1, carb: 15, fat: 0, sugar: 15, flag: "green", gluten: false },
+      { id: "fresas_5_grandes", name: "Fresas grandes", portion: "5 piezas (~90g)", kcal: 29, prot: 1, carb: 7, fat: 0, sugar: 4, flag: "green", gluten: false },
     ],
   },
   verdura: {
@@ -162,6 +163,7 @@ export const FOODS = {
       { id: "mcdonalds_papas_grandes", name: "Papas grandes McDonald's", portion: "1 orden (~116g)", kcal: 363, prot: 4, carb: 48, fat: 17, sugar: 0, flag: "red", gluten: false },
 { id: "mcdonalds_mcflurry_oreo", name: "McFlurry Oreo McDonald's", portion: "1 pieza (~196g)", kcal: 424, prot: 8, carb: 65, fat: 13, sugar: 45, flag: "red", gluten: true },
       { id: "oreos_6", name: "Oreos", portion: "6 galletas (~60g)", kcal: 282, prot: 3, carb: 41, fat: 12, sugar: 23, flag: "red", gluten: true },
-    { id: "restaurante_espanol", name: "Comida restaurante español", portion: "1 comida compartida", kcal: 1000, prot: 40, carb: 60, fat: 55, sugar: 5, flag: "red", gluten: true },],
+    { id: "restaurante_espanol", name: "Comida restaurante español", portion: "1 comida compartida", kcal: 1000, prot: 40, carb: 60, fat: 55, sugar: 5, flag: "red", gluten: true },
+    { id: "cajeta_coronado_1cda", name: "Cajeta Coronado", portion: "1 cda sopera (30g)", kcal: 101, prot: 2, carb: 20, fat: 2, sugar: 20, flag: "red", gluten: false },],
   },
 };
