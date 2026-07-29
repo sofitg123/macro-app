@@ -33,6 +33,7 @@ export const FOODS = {
       { id: "leche_light", name: "Leche Santa Clara light", portion: "150ml", kcal: 55, prot: 5, carb: 6, fat: 1, sugar: 6, flag: "yellow", gluten: false },
       { id: "kefir", name: "Kefir shot", portion: "30ml", kcal: 18, prot: 1, carb: 2, fat: 0, sugar: 2, flag: "green", gluten: false },
       { id: "leche_deslactosada_santa_clara_medio", name: "Leche deslactosada Santa Clara", portion: "1/2 taza (120ml)", kcal: 61, prot: 4, carb: 7, fat: 2, sugar: 6, flag: "green", gluten: false },
+      { id: "leche_entera_santa_clara_100ml", name: "Leche entera Santa Clara", portion: "100ml", kcal: 61, prot: 3, carb: 6, fat: 3, sugar: 6, flag: "yellow", gluten: false },
       { id: "queso_panela_30g", name: "Queso panela", portion: "1 rebanada (30g)", kcal: 44, prot: 5, carb: 2, fat: 2, sugar: 0, flag: "yellow", gluten: false },
       { id: "cottage_100g", name: "Queso cottage", portion: "100g", kcal: 71, prot: 10, carb: 1, fat: 3, sugar: 1, flag: "green", gluten: false },
     ],
